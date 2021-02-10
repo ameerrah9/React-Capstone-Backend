@@ -3,49 +3,56 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    @teams = Team.all
-
-    render json: @teams
+    render json: Team.all.map { |team| TeamSerializer.new(team) }
   end
 
   # GET /teams/1
   def show
-    render json: @team
+    team = Team.find(params[:id])
+    render json: TeamSerializer.new(team)
   end
 
   # POST /teams
   def create
-    @team = Team.new(team_params)
+    team = Team.new(team_params)
 
-    if @team.save
-      render json: @team, status: :created, location: @team
+    if team.save
+      render json: TeamSerializer.new(team)
     else
-      render json: @team.errors, status: :unprocessable_entity
+      render json: { errors: team.errors.full_messages }
     end
   end
 
   # PATCH/PUT /teams/1
   def update
-    if @team.update(team_params)
-      render json: @team
+    team = Team.find(params[:id])
+
+    if team.update(team_params)
+      render json: TeamSerializer.new(team)
     else
-      render json: @team.errors, status: :unprocessable_entity
+      render json: { errors: team.errors.full_messages }
     end
   end
 
   # DELETE /teams/1
   def destroy
-    @team.destroy
+    team = Team.find(params[:id])
+
+    if team.destroy
+      render json: TeamSerializer.new(team)
+    else
+      render json: { errors: team.errors.full_messages }
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
-      @team = Team.find(params[:id])
+      team = Team.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def team_params
-      params.require(:team).permit(:img_src, :cit, :name, :wins, :losses, :likes, :conference_rank)
+      params.require(:team).permit(:img_src, :city, :name, :wins, :losses, :likes, :conference_rank)
     end
 end
