@@ -1,5 +1,11 @@
-class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :update, :destroy]
+class Api::V1::TeamsController < ApplicationController
+  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_not_logged_in
+  before_action :authenticate_user!, only: [:update, :destroy]
+
+  def new
+    user = User.new
+  end
 
   # GET /teams
   def index
