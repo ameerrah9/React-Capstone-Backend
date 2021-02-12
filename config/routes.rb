@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  resources :secrets
+
+  post '/api/v1/login', to: 'api/v1/sessions#create'
+  get '/api/v1/get_current_user', to: 'api/v1/sessions#get_current_user'
+  # get '/api/v1/signup'
   # I want my api be gamezone.com/api/v1/resource
   namespace  :api do
     namespace  :v1 do
-      resources :users do
-        resources :teams, only: [:new, :create, :index, :show, :destroy]
-      end
+      # resources :users do
+      #   resources :teams, only: [:new, :create, :index, :show, :destroy]
+      # end
   
       resources :teams
       resources :users

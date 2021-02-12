@@ -16,3 +16,23 @@ User.create(
         img_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Donald_Glover_TIFF_2015.jpg/440px-Donald_Glover_TIFF_2015.jpg",
         password: "1234"
     )
+
+User.create(
+    firstname: "Amy",
+    lastname: "Pope",
+    location: "New York",
+    username: "apope",
+    email: "apope@mail.com",
+    img_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Donald_Glover_TIFF_2015.jpg/440px-Donald_Glover_TIFF_2015.jpg",
+    password: "1234"
+)
+
+User.create(
+    firstname: "Nia",
+    lastname: "Long",
+    location: "New York",
+    username: "nial",
+    email: "nialong@mail.com",
+    img_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Donald_Glover_TIFF_2015.jpg/440px-Donald_Glover_TIFF_2015.jpg",
+    password: "1234"
+)

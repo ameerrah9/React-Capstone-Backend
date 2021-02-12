@@ -21,15 +21,6 @@ Bundler.require(*Rails.groups)
 
 module GameZoneBackend
   class Application < Rails::Application
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*',
-          :headers => :any,
-          :methods => [:get, :post, :delete, :put, :patch, :options, :head],
-          :max_age => 0
-      end
-    end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
@@ -42,5 +33,8 @@ module GameZoneBackend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_cookie_name'
+
   end
 end
