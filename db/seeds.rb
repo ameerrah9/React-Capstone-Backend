@@ -36,3 +36,13 @@ User.create(
     img_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Donald_Glover_TIFF_2015.jpg/440px-Donald_Glover_TIFF_2015.jpg",
     password: "1234"
 )
+
+User.create(
+    firstname: "Tom",
+    lastname: "Martin",
+    location: "New Jersey",
+    username: "tmartin",
+    email: "tmartin@mail.com",
+    img_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Beyonc%C3%A9_at_The_Lion_King_European_Premiere_2019.png/440px-Beyonc%C3%A9_at_The_Lion_King_European_Premiere_2019.png",
+    password: "1234"
+)

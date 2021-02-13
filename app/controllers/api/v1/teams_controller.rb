@@ -9,7 +9,9 @@ class Api::V1::TeamsController < ApplicationController
 
   # GET /teams
   def index
-    render json: Team.all.map { |team| TeamSerializer.new(team) }
+      @teams = current_user.teams
+      render json: @teams
+    #render json: Team.all.map { |team| TeamSerializer.new(team) }
   end
 
   # GET /teams/1
