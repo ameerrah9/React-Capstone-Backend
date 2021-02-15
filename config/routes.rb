@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :favorites
   post '/api/v1/login', to: 'api/v1/sessions#create'
   post '/api/v1/signup', to: 'api/v1/users#create'
   delete '/api/v1/logout', to: 'api/v1/sessions#destroy'
@@ -10,7 +11,9 @@ Rails.application.routes.draw do
     namespace  :v1 do
 
       resources :users do
-        resources :teams, only: [:new, :create, :index, :show, :destroy]
+        resources :favorites, only: [:new, :create, :index, :show, :destroy] do
+          resources :teams, only: [:new, :create, :index, :show, :destroy]
+          end
       end
 
       resources :teams

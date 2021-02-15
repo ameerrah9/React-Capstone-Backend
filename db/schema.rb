@@ -10,27 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_154718) do
+ActiveRecord::Schema.define(version: 2021_02_15_052929) do
 
-  create_table "secrets", force: :cascade do |t|
-    t.string "content"
+  create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "img_src"
+    t.string "logo_url"
     t.string "city"
     t.string "name"
     t.integer "wins"
     t.integer "losses"
-    t.integer "likes"
     t.integer "conference_rank"
-    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,5 +41,4 @@ ActiveRecord::Schema.define(version: 2021_02_11_154718) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "teams", "users"
 end

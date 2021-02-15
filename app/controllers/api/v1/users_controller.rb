@@ -1,5 +1,4 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
 
   def index
     @users = User.all
@@ -48,11 +47,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  private  
 
     # Only allow a trusted parameter "white list" through.
     def user_params
