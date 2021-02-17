@@ -1,4 +1,4 @@
 class FavoriteSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :teams
+  attributes :team
 end

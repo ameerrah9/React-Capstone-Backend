@@ -45,12 +45,8 @@ User.create(
     password: "1234"
     )
 
+    
 #Teams
-#Favorites
-10.times do
-   Favorite.create(user_id: User.all.sample.id)
-end
-
 Team.create(
     logo_url: "https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg",
     city: "Washington",
@@ -293,3 +289,8 @@ Team.create(
 )
 # Team.create(logo_url: "https://upload.wikimedia.org/wikipedia/en/c/c7/SacramentoKings.svg", city: "Sacramento", name: "Kings", wins: 12, losses: 13, conference_rank: 5)
 # user_id: User.all.sample.id,
+
+#Favorites
+10.times do
+    Favorite.create(user_id: User.all.sample.id, team_id: Team.all.sample.id)
+ end
