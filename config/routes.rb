@@ -17,6 +17,7 @@ Rails.application.routes.draw do
           end
       end
 
+      resources :favorites
       resources :teams
       resources :users
     end
