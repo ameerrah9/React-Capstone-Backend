@@ -1,49 +1,97 @@
 class Api::V1::FavoritesController < ApplicationController
 
   # GET /favorites
-  def index
-    @favorites = Favorite.all
+  # def index
+  #       if params[:user_id]
+  #           @favorites = Favorite.where(user_id: params[:user_id])
+  #           render json: FavoriteSerializer.new(@favorites).serialized_json
+  #       elsif
+  #           @teams = Team.all
+  #           render json: TeamSerializer.new(@teams).serialized_json
+  #       else
+  #         render json: {
+  #           error: "You must be logged in to see favorites"
+  #         }
+  #   end
+  # end
 
-    render json: FavoriteSerializer.new(@favorites)
+  def index
+    # is there an incoming user id
+    # but does that matter?  do we always want just the current user's trips?
+    if logged_in?
+      @favorites = current_user.favorites
+
+      render json: FavoriteSerializer.new(@favorites)
+    else
+      render json: {
+        error: "You must be logged in to see favorites"
+      }
+    end
   end
+
+  def current_user_favorites
+    if logged_in?
+        @favorites = current_user.favorites
+        render json: FavoriteSerializer.new(@favorites).serialized_json
+    
+    else
+        render json: {
+            notice: "You don't have any favorites, yet."
+        }
+    end
+end
 
   # GET /favorites/1
   def show
+    @favorite = Favorite.find(params[:id])
     render json: @favorite
   end
 
   # POST /favorites
   def create
-    @favorite = Favorite.new(favorite_params)
+    @favorite = current_user.favorites.build(favorite_params)
 
     if @favorite.save
-      render json: FavoriteSerializer.new(@favorite)
+      render json: FavoriteSerializer.new(@favorite), status: :created
     else
-      render json: @favorite.errors, status: :unprocessable_entity
+      error_resp = {
+        error: @favorite.errors.full_messages.to_sentence
+      }
+      render json: error_resp, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /favorites/1
   def update
     if @favorite.update(favorite_params)
-      render json: @favorite
+      render json: FavoriteSerializer.new(@favorite), status: :ok
     else
-      render json: @favorite.errors, status: :unprocessable_entity
-    end
+      error_resp = {
+        error: @favorite.errors.full_messages.to_sentence
+      }
+      render json: error_resp, status: :unprocessable_entity    end
   end
 
+  
   # DELETE /favorites/1
   def destroy
-    favorite = Favorite.find(params[:id])
+    @favorite = Favorite.find(params[:id])
 
-    if favorite.destroy
-      render json: { message: 'favorite deleted' }
+    if @favorite.destroy
+      render json: { data: 'Favorite successfully removed' }, status: :ok
     else
-      render json: { errors: favorite.errors.full_messages }
+      error_resp = {
+        error: "Favorite not found and not destroyed"
+      }
+      render json: error_resp, status: :unprocessable_entity
     end
   end
 
   private
+  def set_favorite
+    @favorite = Favorite.find(params[:id])
+  end
 
     # Only allow a trusted parameter "white list" through.
     def favorite_params

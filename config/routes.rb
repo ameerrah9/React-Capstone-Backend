@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :favorites
   post '/api/v1/login', to: 'api/v1/sessions#create'
   post '/api/v1/signup', to: 'api/v1/users#create'
   delete '/api/v1/logout', to: 'api/v1/sessions#destroy'
   get '/api/v1/get_current_user', to: 'api/v1/sessions#get_current_user'
   
-  # get '/api/v1/signup'
-  # I want my api be gamezone.com/api/v1/resource
+  get "/api/v1/current_user_favorites", to: "api/v1/favorites#current_user_favorites"
+
   namespace  :api do
     namespace  :v1 do
 
@@ -23,5 +22,4 @@ Rails.application.routes.draw do
     end
 
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
