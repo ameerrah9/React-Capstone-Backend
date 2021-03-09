@@ -1,23 +1,7 @@
 class Api::V1::FavoritesController < ApplicationController
 
-  # GET /favorites
-  # def index
-  #       if params[:user_id]
-  #           @favorites = Favorite.where(user_id: params[:user_id])
-  #           render json: FavoriteSerializer.new(@favorites).serialized_json
-  #       elsif
-  #           @teams = Team.all
-  #           render json: TeamSerializer.new(@teams).serialized_json
-  #       else
-  #         render json: {
-  #           error: "You must be logged in to see favorites"
-  #         }
-  #   end
-  # end
 
   def index
-    # is there an incoming user id
-    # but does that matter?  do we always want just the current user's trips?
     if logged_in?
       @favorites = current_user.favorites
 
@@ -49,6 +33,9 @@ end
 
   # POST /favorites
   def create
+    byebug
+    current_user = User.find_by(id: params[:user_id])
+
     @favorite = current_user.favorites.build(favorite_params)
 
     if @favorite.save
@@ -76,6 +63,7 @@ end
   
   # DELETE /favorites/1
   def destroy
+    byebug
     @favorite = Favorite.find(params[:id])
 
     if @favorite.destroy
