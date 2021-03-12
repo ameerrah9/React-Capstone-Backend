@@ -33,7 +33,8 @@ end
 
   # POST /favorites
   def create
-    byebug
+    # add conditional for unique teams
+
     current_user = User.find_by(id: params[:user_id])
 
     @favorite = current_user.favorites.build(favorite_params)
@@ -63,7 +64,6 @@ end
   
   # DELETE /favorites/1
   def destroy
-    byebug
     @favorite = Favorite.find(params[:id])
 
     if @favorite.destroy
