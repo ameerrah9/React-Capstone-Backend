@@ -31,6 +31,8 @@ Keep track of your favorite NBA teams. GameZone helps NBA fans get up-to-date in
 
 ## Getting Started
 
+#### Ensure Cors is set to your local environment
+
 1. Install all dependencies
    ```bash
    bundle install
