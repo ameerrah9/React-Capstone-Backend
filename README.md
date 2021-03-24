@@ -8,6 +8,16 @@ Keep track of your favorite NBA teams. GameZone helps NBA fans get up-to-date in
 - Allows for user authentication and authorizes users with sessions
 - Users can add and edit favorite teams
 
+## Dependencies
+
+- Node.js: Node Package Manager (npm)
+- Ruby: Bundler
+- React.js
+- Redux
+- React Router
+- Material UI
+- Styled component
+
 ## Installation
 
 1.  Create empty directory and cd into project directory
