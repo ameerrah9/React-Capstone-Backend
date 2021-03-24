@@ -7,20 +7,29 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://gamezone.surge.sh'
+    origins 'https://localhost3001', 'https://localhost3000'
     
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
       credentials: true
     end
+  
+  # allow do
+  #   origins 'https://gamezone.surge.sh'
+    
+  #   resource '*',
+  #     headers: :any,
+  #     methods: [:get, :post, :put, :patch, :delete, :options, :head],
+  #     credentials: true
+  #   end
 
-    allow do
-      origins 'https://game-zone-api.herokuapp.com'
+    # allow do
+    #   origins 'https://game-zone-api.herokuapp.com'
       
-      resource '*',
-        headers: :any,
-        methods: [:get, :post, :put, :patch, :delete, :options, :head],
-        credentials: true
-      end
+    #   resource '*',
+    #     headers: :any,
+    #     methods: [:get, :post, :put, :patch, :delete, :options, :head],
+    #     credentials: true
+    #   end
 end
