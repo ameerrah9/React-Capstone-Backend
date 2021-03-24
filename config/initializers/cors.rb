@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://gamezone.surge.sh/'
+    origins 'https://gamezone.surge.sh'
     
     resource '*',
       headers: :any,
@@ -16,7 +16,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     end
 
     allow do
-      origins 'https://game-zone-api.herokuapp.com/'
+      origins 'https://game-zone-api.herokuapp.com'
       
       resource '*',
         headers: :any,
